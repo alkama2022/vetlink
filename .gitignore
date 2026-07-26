@@ -1,0 +1,48 @@
+# Virtual environment
+myenv/
+venv/
+env/
+.venv/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django files
+*.log
+local_settings.py
+
+# Database
+db.sqlite3
+db.sqlite3-journal
+
+# Environment variables
+.env
+.env.*
+
+# Static and media (optional - usually not committed)
+staticfiles/
+media/
+
+# Django migrations
+# Keep migration files for production projects
+# Uncomment only if you don't want to track migrations
+# */migrations/*.py
+# !*/migrations/__init__.py
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Coverage/testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
