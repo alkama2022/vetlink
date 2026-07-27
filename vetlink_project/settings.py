@@ -26,6 +26,8 @@ SECRET_KEY = 'django-insecure-oo5h-07a2m=88!2rak#8ti*&rgfp+j!st0x6ijc64^=(*37w*7
 DEBUG = True
 
 ALLOWED_HOSTS = []
+# Custom User Model
+AUTH_USER_MODEL = 'accounts.User'
 
 
 # Application definition
@@ -37,7 +39,25 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    # Third party
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'corsheaders',
+    'django_filters',
+    # Custom apps
+    'vetnarian_app',
+    'accounts',
+    'clinics',
+    'patients',
+    'appointments',
+    'treatments',
+    'inventory',
+    'billing',
+    'dashboard',
 ]
+
+AUTH_USER_MODEL = "accounts.User"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -115,3 +135,78 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+
+
+
+
+
+
+
+
+import os
+from pathlib import Path
+from datetime import timedelta
+
+# BASE_DIR = Path(__file__).resolve().parent.parent
+
+# SECRET_KEY = 'your-secret-key-here'
+
+# DEBUG = True
+
+ALLOWED_HOSTS = ['*']
+
+
+
+
+# ROOT_URLCONF = 'vetlink.urls'
+
+# TEMPLATES = [
+#     {
+#         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+#         'DIRS': [],
+#         'APP_DIRS': True,
+#         'OPTIONS': {
+#             'context_processors': [
+#                 'django.template.context_processors.debug',
+#                 'django.template.context_processors.request',
+#                 'django.contrib.auth.context_processors.auth',
+#                 'django.contrib.messages.context_processors.messages',
+#             ],
+#         },
+#     },
+# ]
+
+
+
+# REST Framework
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 20,
+}
+
+# JWT Settings
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+}
+
+# CORS Settings
+CORS_ALLOW_ALL_ORIGINS = True
+
+# Static & Media Files
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
